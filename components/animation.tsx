@@ -4,7 +4,7 @@ import Lottie from 'react-lottie-player';
 import lottieJson from '../public/animation.json';
 
 const Animation = () => {
-    return <Lottie loop animationData={lottieJson} play style={{ width: `100%`, height: `100%` }} />;
+    return <Lottie loop animationData={lottieJson} play style={{ width: `60%`, height: `60%` }} />;
 };
 
 export default Animation;

@@ -1,11 +1,15 @@
 'use client';
 import Link from 'next/link';
-import { Si4Chan } from 'react-icons/si';
 import { useEffect, useState } from 'react';
 
 const Navigation = () => {
     const [scrollY, setScrollY] = useState(0);
     const [isNavVisible, setIsNavVisible] = useState(true);
+    const [isMenuVisible, seIstMenuVisible] = useState(false);
+
+    const toggleNav = () => {
+        seIstMenuVisible(!isMenuVisible);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -27,6 +31,9 @@ const Navigation = () => {
     }, [isNavVisible]);
 
     return (
+        // <div className="flex justify-between items-center p-6 font-play shadow">
+
+        // </div>
         <div
             className={`${
                 isNavVisible ? 'visible' : 'hidden'
@@ -55,7 +62,8 @@ const Navigation = () => {
                     </svg>
                 </Link>
             </div>
-            <div>
+            {/* 반응형 메뉴 */}
+            <div className="hidden md:flex">
                 <span className="px-5">
                     <Link href="/post">Post</Link>
                 </span>
@@ -63,6 +71,36 @@ const Navigation = () => {
                     <Link href="/about">About</Link>
                 </span>
             </div>
+            {/* 메뉴 버튼 - 작은 화면에서 표시 */}
+            <div className="md:hidden cursor-pointer" onClick={toggleNav}>
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </div>
+            {/* 햄버거 아이콘 클릭 시 나타날 메뉴 */}
+            {isMenuVisible && (
+                <div className="md:hidden absolute top-16 right-0 bg-white w-48 shadow p-4">
+                    <div className="mb-2">
+                        <Link href="/post">
+                            {/* <a className="block px-4 py-2">Post</a> */}
+                            Post
+                        </Link>
+                    </div>
+                    <div>
+                        <Link href="/about">
+                            {/* <a className="block px-4 py-2">About</a> */}
+                            About
+                        </Link>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
